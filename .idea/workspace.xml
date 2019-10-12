@@ -24,10 +24,10 @@
     <property name="$PROJECT_DIR$/src/Grammar.g4::/gen-listener" value="true" />
     <property name="$PROJECT_DIR$/src/Grammar.g4::/gen-visitor" value="true" />
     <property name="$PROJECT_DIR$/src/Grammar.g4::/output-dir" value="D:\School\CMPILER\PE1\Code\CMPILERMP1\src" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src" />
-    <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../ANTLR JAR File/antlr-4.7.2-complete.jar!/" />
+    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="com.intellij.jarRepository.settings.RemoteRepositoriesConfigurable" />
   </component>
   <component name="RunDashboard">
@@ -60,7 +60,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>

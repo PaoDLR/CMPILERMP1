@@ -1,6 +1,12 @@
-//A sample grammar named Grammar
+/*
+* @authors De Castro, Delos Reyes
+*/
 grammar Grammar;
 
-a: 'grammar' ID;
-ID: ['a-z']+;
-WS: [ \t\r\n]+ -> skip;
+// Parser rules
+union: (TERMINALS WS* 'U' WS* TERMINALS)*;
+
+// Lexer rules
+TERMINALS: [a-z_0-9]+;
+
+WS: [ \t\r\n]+ -> skip; //Whitespace
