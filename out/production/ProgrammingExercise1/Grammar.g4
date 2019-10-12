@@ -6,16 +6,12 @@ grammar Grammar;
 // Parser rules
 
 //Union
-output: union
-        |
-        accterminals
-        |
-        epsilon
-        ;
+union: (userinput WS? 'U' WS? userinput)*
+       |
+       epsilon;
 
-union: (accterminals WS? 'U' WS? accterminals)*; // Union
 epsilon: 'E'; // Epsilon
-accterminals: TERMINALS; // Accepted terminals
+userinput: TERMINALS; //inputs
 
 // Lexer rules
 TERMINALS: [a-z_0-9]+; //Letters & Numbers

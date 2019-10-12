@@ -10,9 +10,27 @@ import org.antlr.v4.runtime.tree.ParseTreeVisitor;
  */
 public interface GrammarVisitor<T> extends ParseTreeVisitor<T> {
 	/**
+	 * Visit a parse tree produced by {@link GrammarParser#output}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutput(GrammarParser.OutputContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link GrammarParser#union}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitUnion(GrammarParser.UnionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GrammarParser#epsilon}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitEpsilon(GrammarParser.EpsilonContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GrammarParser#accterminals}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAccterminals(GrammarParser.AccterminalsContext ctx);
 }
