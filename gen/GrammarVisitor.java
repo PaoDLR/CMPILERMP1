@@ -1,4 +1,4 @@
-// Generated from D:/School/CMPILER/PE1/Code/CMPILERMP1/src\Grammar.g4 by ANTLR 4.7.2
+// Generated from D:/School/CMPILER/PE1/Code/CMPILERMP1\Grammar.g4 by ANTLR 4.7.2
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
@@ -22,15 +22,15 @@ public interface GrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitUnion(GrammarParser.UnionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link GrammarParser#epsilon}.
+	 * Visit a parse tree produced by {@link GrammarParser#accTerms}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitEpsilon(GrammarParser.EpsilonContext ctx);
+	T visitAccTerms(GrammarParser.AccTermsContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link GrammarParser#accterminals}.
+	 * Visit a parse tree produced by {@link GrammarParser#eps}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAccterminals(GrammarParser.AccterminalsContext ctx);
+	T visitEps(GrammarParser.EpsContext ctx);
 }

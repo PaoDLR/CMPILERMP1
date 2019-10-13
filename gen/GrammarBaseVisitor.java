@@ -1,4 +1,4 @@
-// Generated from D:/School/CMPILER/PE1/Code/CMPILERMP1/src\Grammar.g4 by ANTLR 4.7.2
+// Generated from D:/School/CMPILER/PE1/Code/CMPILERMP1\Grammar.g4 by ANTLR 4.7.2
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 
 /**
@@ -30,12 +30,12 @@ public class GrammarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implement
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitEpsilon(GrammarParser.EpsilonContext ctx) { return visitChildren(ctx); }
+	@Override public T visitAccTerms(GrammarParser.AccTermsContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitAccterminals(GrammarParser.AccterminalsContext ctx) { return visitChildren(ctx); }
+	@Override public T visitEps(GrammarParser.EpsContext ctx) { return visitChildren(ctx); }
 }
