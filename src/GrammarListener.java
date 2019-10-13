@@ -27,6 +27,16 @@ public interface GrammarListener extends ParseTreeListener {
 	 */
 	void exitUnion(GrammarParser.UnionContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link GrammarParser#concat}.
+	 * @param ctx the parse tree
+	 */
+	void enterConcat(GrammarParser.ConcatContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GrammarParser#concat}.
+	 * @param ctx the parse tree
+	 */
+	void exitConcat(GrammarParser.ConcatContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link GrammarParser#accTerms}.
 	 * @param ctx the parse tree
 	 */

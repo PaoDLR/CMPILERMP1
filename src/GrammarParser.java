@@ -16,13 +16,13 @@ public class GrammarParser extends Parser {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		TERMINALS=1, EPSILON=2, OPARENTHESIS=3, CPARENTHESIS=4, UNION=5, NOM=6, 
-		OOM=7, OPT=8;
+		TERMINALS=1, EPSILON=2, OPAREN=3, CPAREN=4, UNION=5, NOM=6, OOM=7, OPT=8, 
+		WS=9;
 	public static final int
-		RULE_output = 0, RULE_union = 1, RULE_accTerms = 2, RULE_eps = 3;
+		RULE_output = 0, RULE_union = 1, RULE_concat = 2, RULE_accTerms = 3, RULE_eps = 4;
 	private static String[] makeRuleNames() {
 		return new String[] {
-			"output", "union", "accTerms", "eps"
+			"output", "union", "concat", "accTerms", "eps"
 		};
 	}
 	public static final String[] ruleNames = makeRuleNames();
@@ -34,8 +34,8 @@ public class GrammarParser extends Parser {
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
-			null, "TERMINALS", "EPSILON", "OPARENTHESIS", "CPARENTHESIS", "UNION", 
-			"NOM", "OOM", "OPT"
+			null, "TERMINALS", "EPSILON", "OPAREN", "CPAREN", "UNION", "NOM", "OOM", 
+			"OPT", "WS"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -90,11 +90,14 @@ public class GrammarParser extends Parser {
 	}
 
 	public static class OutputContext extends ParserRuleContext {
+		public ConcatContext concat() {
+			return getRuleContext(ConcatContext.class,0);
+		}
 		public UnionContext union() {
 			return getRuleContext(UnionContext.class,0);
 		}
-		public AccTermsContext accTerms() {
-			return getRuleContext(AccTermsContext.class,0);
+		public EpsContext eps() {
+			return getRuleContext(EpsContext.class,0);
 		}
 		public OutputContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -114,21 +117,28 @@ public class GrammarParser extends Parser {
 		OutputContext _localctx = new OutputContext(_ctx, getState());
 		enterRule(_localctx, 0, RULE_output);
 		try {
-			setState(10);
+			setState(13);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,0,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(8);
-				union();
+				setState(10);
+				concat();
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(9);
-				accTerms();
+				setState(11);
+				union();
+				}
+				break;
+			case 3:
+				enterOuterAlt(_localctx, 3);
+				{
+				setState(12);
+				eps();
 				}
 				break;
 			}
@@ -145,13 +155,24 @@ public class GrammarParser extends Parser {
 	}
 
 	public static class UnionContext extends ParserRuleContext {
-		public List<AccTermsContext> accTerms() {
-			return getRuleContexts(AccTermsContext.class);
+		public List<ConcatContext> concat() {
+			return getRuleContexts(ConcatContext.class);
 		}
-		public AccTermsContext accTerms(int i) {
-			return getRuleContext(AccTermsContext.class,i);
+		public ConcatContext concat(int i) {
+			return getRuleContext(ConcatContext.class,i);
 		}
-		public TerminalNode UNION() { return getToken(GrammarParser.UNION, 0); }
+		public TerminalNode OPAREN() { return getToken(GrammarParser.OPAREN, 0); }
+		public TerminalNode CPAREN() { return getToken(GrammarParser.CPAREN, 0); }
+		public List<TerminalNode> UNION() { return getTokens(GrammarParser.UNION); }
+		public TerminalNode UNION(int i) {
+			return getToken(GrammarParser.UNION, i);
+		}
+		public List<UnionContext> union() {
+			return getRuleContexts(UnionContext.class);
+		}
+		public UnionContext union(int i) {
+			return getRuleContext(UnionContext.class,i);
+		}
 		public UnionContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -170,16 +191,165 @@ public class GrammarParser extends Parser {
 		UnionContext _localctx = new UnionContext(_ctx, getState());
 		enterRule(_localctx, 2, RULE_union);
 		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			{
-			setState(12);
-			accTerms();
-			setState(13);
-			match(UNION);
-			setState(14);
-			accTerms();
+			setState(44);
+			_errHandler.sync(this);
+			switch ( getInterpreter().adaptivePredict(_input,1,_ctx) ) {
+			case 1:
+				enterOuterAlt(_localctx, 1);
+				{
+				setState(15);
+				concat();
+				}
+				break;
+			case 2:
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(16);
+				match(OPAREN);
+				{
+				setState(17);
+				concat();
+				setState(18);
+				match(UNION);
+				setState(19);
+				concat();
+				}
+				setState(21);
+				match(CPAREN);
+				setState(22);
+				match(UNION);
+				setState(23);
+				union();
+				}
+				break;
+			case 3:
+				enterOuterAlt(_localctx, 3);
+				{
+				setState(25);
+				match(OPAREN);
+				{
+				setState(26);
+				concat();
+				setState(27);
+				match(UNION);
+				setState(28);
+				union();
+				}
+				setState(30);
+				match(CPAREN);
+				setState(31);
+				union();
+				}
+				break;
+			case 4:
+				enterOuterAlt(_localctx, 4);
+				{
+				setState(33);
+				match(OPAREN);
+				{
+				setState(34);
+				concat();
+				setState(35);
+				match(UNION);
+				setState(36);
+				union();
+				}
+				setState(38);
+				match(CPAREN);
+				}
+				break;
+			case 5:
+				enterOuterAlt(_localctx, 5);
+				{
+				{
+				setState(40);
+				concat();
+				setState(41);
+				match(UNION);
+				setState(42);
+				union();
+				}
+				}
+				break;
 			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class ConcatContext extends ParserRuleContext {
+		public TerminalNode OPAREN() { return getToken(GrammarParser.OPAREN, 0); }
+		public ConcatContext concat() {
+			return getRuleContext(ConcatContext.class,0);
+		}
+		public TerminalNode CPAREN() { return getToken(GrammarParser.CPAREN, 0); }
+		public List<AccTermsContext> accTerms() {
+			return getRuleContexts(AccTermsContext.class);
+		}
+		public AccTermsContext accTerms(int i) {
+			return getRuleContext(AccTermsContext.class,i);
+		}
+		public ConcatContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_concat; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof GrammarListener ) ((GrammarListener)listener).enterConcat(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof GrammarListener ) ((GrammarListener)listener).exitConcat(this);
+		}
+	}
+
+	public final ConcatContext concat() throws RecognitionException {
+		ConcatContext _localctx = new ConcatContext(_ctx, getState());
+		enterRule(_localctx, 4, RULE_concat);
+		int _la;
+		try {
+			setState(55);
+			_errHandler.sync(this);
+			switch (_input.LA(1)) {
+			case OPAREN:
+				enterOuterAlt(_localctx, 1);
+				{
+				setState(46);
+				match(OPAREN);
+				setState(47);
+				concat();
+				setState(48);
+				match(CPAREN);
+				}
+				break;
+			case TERMINALS:
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(51); 
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+				do {
+					{
+					{
+					setState(50);
+					accTerms();
+					}
+					}
+					setState(53); 
+					_errHandler.sync(this);
+					_la = _input.LA(1);
+				} while ( _la==TERMINALS );
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (RecognitionException re) {
@@ -194,16 +364,7 @@ public class GrammarParser extends Parser {
 	}
 
 	public static class AccTermsContext extends ParserRuleContext {
-		public List<TerminalNode> TERMINALS() { return getTokens(GrammarParser.TERMINALS); }
-		public TerminalNode TERMINALS(int i) {
-			return getToken(GrammarParser.TERMINALS, i);
-		}
-		public List<TerminalNode> NOM() { return getTokens(GrammarParser.NOM); }
-		public TerminalNode NOM(int i) {
-			return getToken(GrammarParser.NOM, i);
-		}
-		public TerminalNode OPARENTHESIS() { return getToken(GrammarParser.OPARENTHESIS, 0); }
-		public TerminalNode CPARENTHESIS() { return getToken(GrammarParser.CPARENTHESIS, 0); }
+		public TerminalNode TERMINALS() { return getToken(GrammarParser.TERMINALS, 0); }
 		public AccTermsContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -220,94 +381,12 @@ public class GrammarParser extends Parser {
 
 	public final AccTermsContext accTerms() throws RecognitionException {
 		AccTermsContext _localctx = new AccTermsContext(_ctx, getState());
-		enterRule(_localctx, 4, RULE_accTerms);
-		int _la;
+		enterRule(_localctx, 6, RULE_accTerms);
 		try {
-			setState(40);
-			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,4,_ctx) ) {
-			case 1:
-				enterOuterAlt(_localctx, 1);
-				{
-				setState(16);
-				match(TERMINALS);
-				}
-				break;
-			case 2:
-				enterOuterAlt(_localctx, 2);
-				{
-				setState(21);
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-				while (_la==TERMINALS) {
-					{
-					{
-					setState(17);
-					match(TERMINALS);
-					{
-					setState(18);
-					match(NOM);
-					}
-					}
-					}
-					setState(23);
-					_errHandler.sync(this);
-					_la = _input.LA(1);
-				}
-				}
-				break;
-			case 3:
-				enterOuterAlt(_localctx, 3);
-				{
-				setState(24);
-				match(OPARENTHESIS);
-				{
-				setState(26); 
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-				do {
-					{
-					{
-					setState(25);
-					match(TERMINALS);
-					}
-					}
-					setState(28); 
-					_errHandler.sync(this);
-					_la = _input.LA(1);
-				} while ( _la==TERMINALS );
-				}
-				setState(30);
-				match(CPARENTHESIS);
-				}
-				break;
-			case 4:
-				enterOuterAlt(_localctx, 4);
-				{
-				setState(31);
-				match(OPARENTHESIS);
-				setState(36);
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-				while (_la==TERMINALS) {
-					{
-					{
-					setState(32);
-					match(TERMINALS);
-					{
-					setState(33);
-					match(NOM);
-					}
-					}
-					}
-					setState(38);
-					_errHandler.sync(this);
-					_la = _input.LA(1);
-				}
-				setState(39);
-				match(CPARENTHESIS);
-				}
-				break;
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(57);
+			match(TERMINALS);
 			}
 		}
 		catch (RecognitionException re) {
@@ -339,11 +418,11 @@ public class GrammarParser extends Parser {
 
 	public final EpsContext eps() throws RecognitionException {
 		EpsContext _localctx = new EpsContext(_ctx, getState());
-		enterRule(_localctx, 6, RULE_eps);
+		enterRule(_localctx, 8, RULE_eps);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(42);
+			setState(59);
 			match(EPSILON);
 			}
 		}
@@ -359,19 +438,23 @@ public class GrammarParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\n/\4\2\t\2\4\3\t"+
-		"\3\4\4\t\4\4\5\t\5\3\2\3\2\5\2\r\n\2\3\3\3\3\3\3\3\3\3\4\3\4\3\4\7\4\26"+
-		"\n\4\f\4\16\4\31\13\4\3\4\3\4\6\4\35\n\4\r\4\16\4\36\3\4\3\4\3\4\3\4\7"+
-		"\4%\n\4\f\4\16\4(\13\4\3\4\5\4+\n\4\3\5\3\5\3\5\2\2\6\2\4\6\b\2\2\2\61"+
-		"\2\f\3\2\2\2\4\16\3\2\2\2\6*\3\2\2\2\b,\3\2\2\2\n\r\5\4\3\2\13\r\5\6\4"+
-		"\2\f\n\3\2\2\2\f\13\3\2\2\2\r\3\3\2\2\2\16\17\5\6\4\2\17\20\7\7\2\2\20"+
-		"\21\5\6\4\2\21\5\3\2\2\2\22+\7\3\2\2\23\24\7\3\2\2\24\26\7\b\2\2\25\23"+
-		"\3\2\2\2\26\31\3\2\2\2\27\25\3\2\2\2\27\30\3\2\2\2\30+\3\2\2\2\31\27\3"+
-		"\2\2\2\32\34\7\5\2\2\33\35\7\3\2\2\34\33\3\2\2\2\35\36\3\2\2\2\36\34\3"+
-		"\2\2\2\36\37\3\2\2\2\37 \3\2\2\2 +\7\6\2\2!&\7\5\2\2\"#\7\3\2\2#%\7\b"+
-		"\2\2$\"\3\2\2\2%(\3\2\2\2&$\3\2\2\2&\'\3\2\2\2\')\3\2\2\2(&\3\2\2\2)+"+
-		"\7\6\2\2*\22\3\2\2\2*\27\3\2\2\2*\32\3\2\2\2*!\3\2\2\2+\7\3\2\2\2,-\7"+
-		"\4\2\2-\t\3\2\2\2\7\f\27\36&*";
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\13@\4\2\t\2\4\3\t"+
+		"\3\4\4\t\4\4\5\t\5\4\6\t\6\3\2\3\2\3\2\5\2\20\n\2\3\3\3\3\3\3\3\3\3\3"+
+		"\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3"+
+		"\3\3\3\3\3\3\3\3\3\3\3\3\3\5\3/\n\3\3\4\3\4\3\4\3\4\3\4\6\4\66\n\4\r\4"+
+		"\16\4\67\5\4:\n\4\3\5\3\5\3\6\3\6\3\6\2\2\7\2\4\6\b\n\2\2\2B\2\17\3\2"+
+		"\2\2\4.\3\2\2\2\69\3\2\2\2\b;\3\2\2\2\n=\3\2\2\2\f\20\5\6\4\2\r\20\5\4"+
+		"\3\2\16\20\5\n\6\2\17\f\3\2\2\2\17\r\3\2\2\2\17\16\3\2\2\2\20\3\3\2\2"+
+		"\2\21/\5\6\4\2\22\23\7\5\2\2\23\24\5\6\4\2\24\25\7\7\2\2\25\26\5\6\4\2"+
+		"\26\27\3\2\2\2\27\30\7\6\2\2\30\31\7\7\2\2\31\32\5\4\3\2\32/\3\2\2\2\33"+
+		"\34\7\5\2\2\34\35\5\6\4\2\35\36\7\7\2\2\36\37\5\4\3\2\37 \3\2\2\2 !\7"+
+		"\6\2\2!\"\5\4\3\2\"/\3\2\2\2#$\7\5\2\2$%\5\6\4\2%&\7\7\2\2&\'\5\4\3\2"+
+		"\'(\3\2\2\2()\7\6\2\2)/\3\2\2\2*+\5\6\4\2+,\7\7\2\2,-\5\4\3\2-/\3\2\2"+
+		"\2.\21\3\2\2\2.\22\3\2\2\2.\33\3\2\2\2.#\3\2\2\2.*\3\2\2\2/\5\3\2\2\2"+
+		"\60\61\7\5\2\2\61\62\5\6\4\2\62\63\7\6\2\2\63:\3\2\2\2\64\66\5\b\5\2\65"+
+		"\64\3\2\2\2\66\67\3\2\2\2\67\65\3\2\2\2\678\3\2\2\28:\3\2\2\29\60\3\2"+
+		"\2\29\65\3\2\2\2:\7\3\2\2\2;<\7\3\2\2<\t\3\2\2\2=>\7\4\2\2>\13\3\2\2\2"+
+		"\6\17.\679";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {
