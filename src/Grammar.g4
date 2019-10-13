@@ -4,19 +4,27 @@
 grammar Grammar;
 
 // Parser rules
-
-//Union
-output: union
+output: union //The grammar yehey
         |
-        accterminals
-        |
-        epsilon
+        accTerms
         ;
 
-union: (accterminals WS? 'U' WS? accterminals)*; // Union
-epsilon: 'E'; // Epsilon
-accterminals: TERMINALS; // Accepted terminals
+union: (accTerms UNION accTerms); // Union
+accTerms: TERMINALS // Accepted terminals
+          |
+          (TERMINALS(NOM))*
+          |
+          OPARENTHESIS (TERMINALS+) CPARENTHESIS
+          |
+          OPARENTHESIS (TERMINALS(NOM))* CPARENTHESIS;
+eps: EPSILON; // Epsilon
 
 // Lexer rules
 TERMINALS: [a-z_0-9]+; //Letters & Numbers
-WS: [ \t\r\n]+ -> skip; //Whitespace
+EPSILON: [E]; //Epsilon letter 'E'
+OPARENTHESIS: [(]; //Open parenthesis symbol '('
+CPARENTHESIS: [)]; //Close parenthesis symbol ')'
+UNION: [U]; //Union letter 'U'
+NOM: [*]; //None or more symbol '*'
+OOM: [+]; //One or more symbol '+'
+OPT: [?]; //Optional symbol '?"
