@@ -17,6 +17,16 @@ public interface GrammarListener extends ParseTreeListener {
 	 */
 	void exitOutput(GrammarParser.OutputContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link GrammarParser#sym}.
+	 * @param ctx the parse tree
+	 */
+	void enterSym(GrammarParser.SymContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GrammarParser#sym}.
+	 * @param ctx the parse tree
+	 */
+	void exitSym(GrammarParser.SymContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link GrammarParser#union}.
 	 * @param ctx the parse tree
 	 */
