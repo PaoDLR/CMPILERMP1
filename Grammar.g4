@@ -10,7 +10,7 @@ sym:   OPAREN sym CPAREN SYM? sym*
        sym SYM? sym
        |
        concat+ SYM? concat*;
-union: OPAREN union CPAREN
+union: OPAREN union CPAREN SYM?
        |
        union (UNION union | union)
        |

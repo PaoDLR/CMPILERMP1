@@ -28,7 +28,7 @@
     <property name="$PROJECT_DIR$/src/Grammar.g4::/gen-listener" value="true" />
     <property name="$PROJECT_DIR$/src/Grammar.g4::/gen-visitor" value="true" />
     <property name="$PROJECT_DIR$/src/Grammar.g4::/output-dir" value="D:\School\CMPILER\PE1\Code\CMPILERMP1\src" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -47,8 +47,8 @@
     </option>
   </component>
   <component name="RunManager">
-    <configuration name="GrammarExecute" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="GrammarExecute" />
+    <configuration name="AntlrParser" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="AntlrParser" />
       <module name="ProgrammingExercise1" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -56,7 +56,7 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.GrammarExecute" />
+        <item itemvalue="Application.AntlrParser" />
       </list>
     </recent_temporary>
   </component>
